@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.playl.abysscraft.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "ClientInitMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "CloudModifyMixin",
+    "CloudModifyMixin$CloudOptionAccessor",
+    "GameMenuScreenMixin",
+    "MessageHandlerMixin",
+    "ClientCommonNetworkHandlerMixin",
+    "ServerResourcePackLoaderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

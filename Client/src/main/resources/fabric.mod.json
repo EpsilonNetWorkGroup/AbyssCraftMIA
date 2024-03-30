@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "abysscraftclient-mia",
+  "version": "${version}",
+  "name": "AbyssCraftClient-MIA",
+  "description": "作者排名不分前后, 按首字母排序\n${description}",
+  "authors": [
+    "camodmi",
+    "camoench",
+    "snotlout"
+  ],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/abysscraft/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.playl.abysscraft.Client"
+    ]
+  },
+  "mixins": [
+    "abysscraftclient.mixins.json"
+  ],
+  "accessWidener": "abysscraftclient.accesswidener",
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

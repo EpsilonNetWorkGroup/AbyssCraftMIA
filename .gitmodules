@@ -1,0 +1,4 @@
+[submodule "AbyssCraftClientAssets"]
+	path = Client/src/main/resources/assets
+	url = https://github.com/EpsilonNetWorkGroup/AbyssCraftClient-assets.git
+	branch = mia

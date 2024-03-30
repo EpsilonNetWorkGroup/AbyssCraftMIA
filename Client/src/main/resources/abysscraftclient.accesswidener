@@ -1,0 +1,18 @@
+accessWidener	v1	named
+
+accessible field net/minecraft/network/packet/s2c/play/BossBarS2CPacket action Lnet/minecraft/network/packet/s2c/play/BossBarS2CPacket$Action;
+
+mutable field net/minecraft/network/packet/s2c/play/BossBarS2CPacket$AddAction name Lnet/minecraft/text/Text;
+accessible field net/minecraft/network/packet/s2c/play/BossBarS2CPacket$AddAction name Lnet/minecraft/text/Text;
+
+mutable field net/minecraft/network/packet/s2c/play/BossBarS2CPacket$UpdateNameAction name Lnet/minecraft/text/Text;
+accessible field net/minecraft/network/packet/s2c/play/BossBarS2CPacket$UpdateNameAction name Lnet/minecraft/text/Text;
+
+mutable field net/minecraft/network/packet/s2c/play/TitleS2CPacket title Lnet/minecraft/text/Text;
+accessible field net/minecraft/network/packet/s2c/play/TitleS2CPacket title Lnet/minecraft/text/Text;
+
+mutable field net/minecraft/network/packet/s2c/play/SubtitleS2CPacket subtitle Lnet/minecraft/text/Text;
+accessible field net/minecraft/network/packet/s2c/play/SubtitleS2CPacket subtitle Lnet/minecraft/text/Text;
+
+mutable field net/minecraft/network/packet/s2c/play/GameMessageS2CPacket content Lnet/minecraft/text/Text;
+accessible field net/minecraft/network/packet/s2c/play/GameMessageS2CPacket content Lnet/minecraft/text/Text;
