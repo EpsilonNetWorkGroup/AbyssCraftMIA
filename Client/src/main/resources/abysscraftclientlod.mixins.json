@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "LodDataBuilderMixin"
+    "LodDataBuilderMixin",
+    "LodRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
