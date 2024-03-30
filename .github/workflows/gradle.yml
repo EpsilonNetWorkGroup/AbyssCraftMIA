@@ -43,7 +43,7 @@ jobs:
       with:
         arguments: build
     - name: Upload ClientJar
-      if: inputs.release == 'true'
+      if: ${{ github.event.inputs.release == 'true' }}
       uses: actions/upload-artifact@v4
       with:
         name: AbyssCrafClient
