@@ -19,7 +19,8 @@
     ]
   },
   "mixins": [
-    "abysscraftclient.mixins.json"
+    "abysscraftclient.mixins.json",
+    "abysscraftclientlod.mixins.json"
   ],
   "accessWidener": "abysscraftclient.accesswidener",
   "depends": {
