@@ -15,12 +15,8 @@ defaultTasks("licenseFormat", "build")
 allprojects {
 	repositories {
 		maven("https://maven.fabricmc.net/")
-		// ImmPtl
-		maven("https://jitpack.io")
-		// Cloth Config
-		maven("https://maven.shedaniel.me")
-		// WorldEdit
-		maven("https://maven.enginehub.org/repo/")
+		// distanthorizons
+		maven("https://api.modrinth.com/maven")
 		mavenCentral()
 		gradlePluginPortal()
 	}
