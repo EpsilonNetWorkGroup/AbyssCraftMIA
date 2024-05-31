@@ -14,8 +14,6 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation("net.fabricmc.fabric-api:fabric-api:${providers.gradleProperty("fabric_version").get()}")
-
-    modImplementation("maven.modrinth:distanthorizons:2.0.1-a-1.20.2")
 }
 
 blossom {

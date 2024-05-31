@@ -15,8 +15,6 @@ defaultTasks("licenseFormat", "build")
 allprojects {
 	repositories {
 		maven("https://maven.fabricmc.net/")
-		// distanthorizons
-		maven("https://api.modrinth.com/maven")
 		mavenCentral()
 		gradlePluginPortal()
 	}
