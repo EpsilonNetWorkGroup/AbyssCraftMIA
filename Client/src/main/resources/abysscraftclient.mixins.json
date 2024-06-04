@@ -6,13 +6,14 @@
   "mixins": [
   ],
   "client": [
+    "ClientCommonNetworkHandlerMixin",
     "ClientInitMixin",
     "ClientPlayNetworkHandlerMixin",
     "CloudModifyMixin",
     "CloudModifyMixin$CloudOptionAccessor",
+    "DebugHudMixin",
     "GameMenuScreenMixin",
     "MessageHandlerMixin",
-    "ClientCommonNetworkHandlerMixin",
     "ServerResourcePackLoaderMixin"
   ],
   "injectors": {
