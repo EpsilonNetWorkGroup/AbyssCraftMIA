@@ -8,11 +8,11 @@ accessible field net/minecraft/network/packet/s2c/play/BossBarS2CPacket$AddActio
 mutable field net/minecraft/network/packet/s2c/play/BossBarS2CPacket$UpdateNameAction name Lnet/minecraft/text/Text;
 accessible field net/minecraft/network/packet/s2c/play/BossBarS2CPacket$UpdateNameAction name Lnet/minecraft/text/Text;
 
-mutable field net/minecraft/network/packet/s2c/play/TitleS2CPacket title Lnet/minecraft/text/Text;
-accessible field net/minecraft/network/packet/s2c/play/TitleS2CPacket title Lnet/minecraft/text/Text;
+mutable field net/minecraft/network/packet/s2c/play/TitleS2CPacket text Lnet/minecraft/text/Text;
+accessible field net/minecraft/network/packet/s2c/play/TitleS2CPacket text Lnet/minecraft/text/Text;
 
-mutable field net/minecraft/network/packet/s2c/play/SubtitleS2CPacket subtitle Lnet/minecraft/text/Text;
-accessible field net/minecraft/network/packet/s2c/play/SubtitleS2CPacket subtitle Lnet/minecraft/text/Text;
+mutable field net/minecraft/network/packet/s2c/play/SubtitleS2CPacket text Lnet/minecraft/text/Text;
+accessible field net/minecraft/network/packet/s2c/play/SubtitleS2CPacket text Lnet/minecraft/text/Text;
 
 mutable field net/minecraft/network/packet/s2c/play/GameMessageS2CPacket content Lnet/minecraft/text/Text;
 accessible field net/minecraft/network/packet/s2c/play/GameMessageS2CPacket content Lnet/minecraft/text/Text;

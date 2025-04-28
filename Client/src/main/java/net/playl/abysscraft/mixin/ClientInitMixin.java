@@ -37,43 +37,8 @@ public abstract class ClientInitMixin {
     @Inject(method = "onInitFinished", at = @At("HEAD"))
     private void onInitFinished(CallbackInfoReturnable<Runnable> cir) {
         // 强制开启云渲染, 高品质
-        SimpleOption<CloudRenderMode> option = ((CloudModifyMixin.CloudOptionAccessor) Client.mc.options).getCloudRenderMode();
+        SimpleOption<CloudRenderMode> option = ((CloudModifyMixin.CloudOptionAccessor) Client.MC.options).getCloudRenderMode();
         option.setValue(CloudRenderMode.FANCY);
         Client.debugLog("设定游戏选项, 高品质云");
-        if (Client.mc.options.language.equals("zh_cn")) {
-            Thread thread = new Thread(() -> {
-                Client.LOGGER.info("检测CDN是否可用...");
-
-                HttpsURLConnection conn;
-                int ret;
-                try {
-                    URL url = new URL("https://"+ Client.CDNDOMAIN);
-                    conn = (HttpsURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    conn.setInstanceFollowRedirects(false);
-                    conn.setReadTimeout(3000);
-                    conn.setDoInput(true);
-                    conn.setRequestProperty("connection", "close");
-                    conn.setRequestProperty("user-agent", "AbyssCraftClientMIA/"+Client.VERSION);
-
-                    conn.connect();
-                    ret = conn.getResponseCode();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-
-                if (ret == 502) {
-                    Client.LOGGER.info("CDN 正常工作中...");
-                    Client.enableCdn = true;
-                } else {
-                    Client.LOGGER.error("CDN 当前貌似不可用...");
-                    Client.enableCdn = false;
-                }
-
-            });
-
-            thread.start();
-        }
     }
 }

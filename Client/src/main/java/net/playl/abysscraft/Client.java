@@ -18,13 +18,16 @@
 
 package net.playl.abysscraft;
 
+import com.google.gson.Gson;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.playl.abysscraft.listener.HudRender;
+import net.playl.abysscraft.listener.HudRenderListen;
+import net.playl.abysscraft.listener.WorldRenderListen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +35,9 @@ public class Client implements ClientModInitializer {
     public static final String MODID = "{modid}";
     public static final String VERSION = "{version}";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
-    public static final MinecraftClient mc = MinecraftClient.getInstance();
+    public static final MinecraftClient MC = MinecraftClient.getInstance();
+    public static final Gson GSON = new Gson();
+
     public static final MutableText explain = Text.literal(Client.MODID + ": "+ Client.VERSION);
     @Override
     public void onInitializeClient() {
@@ -41,11 +46,8 @@ public class Client implements ClientModInitializer {
     }
 
     private void registerListener() {
-        HudRenderCallback.EVENT.register(new HudRender());
-    }
-
-    public static void hudMessage(Text text) {
-        mc.inGameHud.getChatHud().addMessage(text);
+        WorldRenderEvents.LAST.register(new WorldRenderListen());
+        HudRenderCallback.EVENT.register(new HudRenderListen());
     }
 
     public static void debugLog(String str) {

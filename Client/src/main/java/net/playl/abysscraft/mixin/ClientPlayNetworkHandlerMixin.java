@@ -18,10 +18,13 @@
 
 package net.playl.abysscraft.mixin;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.LoreComponent;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.nbt.NbtString;
 import net.minecraft.network.packet.s2c.play.*;
 import net.minecraft.text.*;
 import net.playl.abysscraft.Client;
@@ -45,7 +48,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
                     Text.of("爱来自AbyssCraft(深渊工艺)\n" + "请加入我们的开发QQ群聊: 894229490"));
             return style.withHoverEvent(e);
         });
-        Client.hudMessage(text);
+        Client.MC.inGameHud.getChatHud().addMessage(text);
     }
 
     @Inject(method = "onWorldTimeUpdate", at = @At("HEAD"))
@@ -65,22 +68,16 @@ public abstract class ClientPlayNetworkHandlerMixin {
 
     @Unique
     private void itemStackTranslation(ItemStack i) {
-        if (i.hasCustomName()) {
+        if (i.get(DataComponentTypes.CUSTOM_NAME) == null) {
             String customName = i.getName().getString();
             Style originStyle = i.getName().getStyle();
             if (TransIndex.ITEM_NAME.hasTranslation(customName)) {
-                i.setCustomName(TransIndex.ITEM_NAME.translate(customName).setStyle(originStyle));
+                i.set(DataComponentTypes.CUSTOM_NAME, TransIndex.ITEM_NAME.translate(customName).setStyle(originStyle));
                 // Lore
                 if (TransIndex.ITEM_LORE.hasTranslation(customName)) {
-                    NbtCompound nbtCompound = i.getSubNbt("display");
-                    if (nbtCompound != null && nbtCompound.getType("Lore") == 9) {
-                        NbtList nbtList = nbtCompound.getList("Lore", 8);
-                        nbtList.clear();
-
-                        TransIndex.ITEM_LORE.translate(customName).forEach(e -> nbtList.add(NbtString.of(Text.Serialization.toJsonString(e))));
-                        nbtCompound.put("Lore", nbtList);
-                    }
-                    i.setSubNbt("display", nbtCompound);
+                    i.remove(DataComponentTypes.LORE);
+                    var newLore = TransIndex.ITEM_LORE.translate(customName);
+                    i.set(DataComponentTypes.LORE, new LoreComponent(newLore));
                 }
             }
         }
@@ -105,33 +102,37 @@ public abstract class ClientPlayNetworkHandlerMixin {
 
     @Inject(method = "onTitle", at = @At("HEAD"))
     private void onTitle(TitleS2CPacket titleS2CPacket, CallbackInfo ci) {
-        String originTitle = titleS2CPacket.title.getString();
-        Style originStyle = titleS2CPacket.title.getStyle();
+        String originTitle = titleS2CPacket.text.getString();
+        Style originStyle = titleS2CPacket.text.getStyle();
         if (TransIndex.TITLE.hasTranslation(originTitle)) {
-            titleS2CPacket.title = TransIndex.TITLE.translate(originTitle).setStyle(originStyle);
+            titleS2CPacket.text = TransIndex.TITLE.translate(originTitle).setStyle(originStyle);
         }
     }
 
     @Inject(method = "onSubtitle", at = @At("HEAD"))
     private void onSubtitle(SubtitleS2CPacket subtitleS2CPacket, CallbackInfo ci) {
-        String originSubtitle = subtitleS2CPacket.subtitle.getString();
-        Style originStyle = subtitleS2CPacket.subtitle.getStyle();
+        String originSubtitle = subtitleS2CPacket.text.getString();
+        Style originStyle = subtitleS2CPacket.text.getStyle();
         if (TransIndex.SUBTITLE.hasTranslation(originSubtitle)) {
-            subtitleS2CPacket.subtitle = TransIndex.SUBTITLE.translate(originSubtitle).setStyle(originStyle);
+            subtitleS2CPacket.text = TransIndex.SUBTITLE.translate(originSubtitle).setStyle(originStyle);
         }
     }
 
-    @Inject(method = "onGameMessage", at = @At("HEAD"))
-    private void onGameMessage(GameMessageS2CPacket gameMessageS2CPacket, CallbackInfo ci) {
-        if (!gameMessageS2CPacket.overlay()) {
-            String json = Text.Serialization.toJsonString(gameMessageS2CPacket.content());
-            // MIA有时使用组件，有时不使用, 而是拼接好的单个字符串组件, 在没有新的良好解决方案下, 最好使用模糊匹配
-            String translationKey;
-            while ((translationKey = TransIndex.SERVERMSG.fuzzTranslationKey(json)) != null) {
-                String translationPart = Objects.requireNonNull(TransIndex.SERVERMSG.translateToString(translationKey));
-                json = json.replace(translationKey, translationPart);
-            }
-            gameMessageS2CPacket.content = Text.Serialization.fromJson(json);
-        }
-    }
+    // FIXME: ikd why not work. TextCodecs.CODEC.decode fail
+//    @Inject(method = "onGameMessage", at = @At("HEAD"))
+//    private void onGameMessage(GameMessageS2CPacket gameMessageS2CPacket, CallbackInfo ci) {
+//        if (!gameMessageS2CPacket.overlay()) {
+//            String json = Client.GSON.toJson(TextCodecs.CODEC.encodeStart(JsonOps.INSTANCE, gameMessageS2CPacket.content));
+//            // MIA有时使用组件，有时不使用, 而是拼接好的单个字符串组件, 在没有新的良好解决方案下, 最好使用模糊匹配
+//            String translationKey;
+//            while ((translationKey = TransIndex.SERVERMSG.fuzzTranslationKey(json)) != null) {
+//                String translationPart = Objects.requireNonNull(TransIndex.SERVERMSG.translateToString(translationKey));
+//                json = json.replace(translationKey, translationPart);
+//            }
+//            gameMessageS2CPacket.content = TextCodecs.CODEC
+//                    .decode(JsonOps.INSTANCE, Client.GSON.fromJson(json, JsonElement.class))
+//                    .getPartialOrThrow().getFirst();
+//
+//        }
+//    }
 }

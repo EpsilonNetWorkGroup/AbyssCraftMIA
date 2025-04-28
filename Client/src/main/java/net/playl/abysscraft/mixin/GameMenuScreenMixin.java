@@ -33,7 +33,7 @@ import java.awt.*;
 public abstract class GameMenuScreenMixin {
     @Inject(method = "render" , at = @At("HEAD"))
     private void onRender(DrawContext drawContext, int i, int j, float f, CallbackInfo ci) {
-        TextRenderer renderer = Client.mc.textRenderer;
+        TextRenderer renderer = Client.MC.textRenderer;
 
         int textWidth = renderer.getWidth(Client.explain);
         int width = (drawContext.getScaledWindowWidth() - textWidth);

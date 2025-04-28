@@ -12,8 +12,7 @@
     "CloudModifyMixin$CloudOptionAccessor",
     "DebugHudMixin",
     "GameMenuScreenMixin",
-    "MessageHandlerMixin",
-    "ServerResourcePackLoaderMixin"
+    "MessageHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

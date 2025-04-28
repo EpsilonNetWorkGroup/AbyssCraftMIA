@@ -22,6 +22,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -29,9 +30,9 @@ import net.playl.abysscraft.util.world.TickRate;
 
 import java.awt.*;
 
-public class HudRender implements HudRenderCallback {
+public class HudRenderListen implements HudRenderCallback {
     @Override
-    public void onHudRender(DrawContext drawContext, float tickDelta) {
+    public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
         float timeSinceLastTick = TickRate.INSTANCE.getTimeSinceLastTick();
 
         if (timeSinceLastTick >= 1.5f) {

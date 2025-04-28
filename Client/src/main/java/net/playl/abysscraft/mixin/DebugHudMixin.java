@@ -33,7 +33,7 @@ public abstract class DebugHudMixin {
     @Inject(method = "getLeftText", at = @At("TAIL"), cancellable = true)
     private void injectDebugLeft(CallbackInfoReturnable<List<String>> cir) {
         var ret = cir.getReturnValue();
-        var camera = Client.mc.player;
+        var camera = Client.MC.player;
 
         if (camera != null) {
             var blockPos = camera.getBlockPos();

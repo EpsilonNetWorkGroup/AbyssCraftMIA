@@ -51,7 +51,7 @@ public class TickRate {
     }
 
     public float getClientTickRate() {
-        if (Client.mc != null && Client.mc.world != null && Client.mc.player != null) return 0;
+        if (Client.MC != null && Client.MC.world != null && Client.MC.player != null) return 0;
         if (System.currentTimeMillis() - timeGameJoined < 4000) return 20;
 
         int numTicks = 0;
