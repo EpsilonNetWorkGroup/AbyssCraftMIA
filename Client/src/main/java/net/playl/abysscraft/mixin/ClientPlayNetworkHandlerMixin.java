@@ -40,8 +40,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
     @Inject(method = "onGameJoin", at = @At("TAIL"))
     private void onGameJoinTail(GameJoinS2CPacket gameJoinS2CPacket, CallbackInfo ci) {
         TickRate.INSTANCE.onJoinGame();
-        Text additionalText = Client.enableCdn ? Text.of(" 已使用CDN加速") : Text.empty();
-        MutableText text = Client.explain.copy().append(additionalText).styled(style -> {
+        MutableText text = Client.explain.copy().styled(style -> {
             HoverEvent e = new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                     Text.of("爱来自AbyssCraft(深渊工艺)\n" + "请加入我们的开发QQ群聊: 894229490"));
             return style.withHoverEvent(e);

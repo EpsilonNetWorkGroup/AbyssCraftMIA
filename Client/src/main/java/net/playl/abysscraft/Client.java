@@ -33,11 +33,6 @@ public class Client implements ClientModInitializer {
     public static final String VERSION = "{version}";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
     public static final MinecraftClient mc = MinecraftClient.getInstance();
-    // 如果因为任何原因下载失败, 将开启fallback, 禁用加速资源包下载功能,
-    // 或游戏语言不是简体中文(中国), 默认不使用CDN(实现在ClientInitMixin)
-    public static boolean enableCdn = false;
-    public static final String CDNDOMAIN = "";
-    public static final String MIADOMAIN = "survival.pack.mineinabyss.com";
     public static final MutableText explain = Text.literal(Client.MODID + ": "+ Client.VERSION);
     @Override
     public void onInitializeClient() {
